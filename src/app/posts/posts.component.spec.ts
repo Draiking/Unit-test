@@ -54,5 +54,21 @@ describe('PostsComponent', () => {
 
   })
 
+  it('should remote post if user confirms', () => {
+    const spy = spyOn(service, 'remove').and.returnValue(EMPTY)
+    spyOn(window, 'confirm').and.returnValue(true)
+    component.delete(10)
+
+    expect(spy).toHaveBeenCalledWith(10)
+  })
+
+  it('should NOT remote post if user doesnt confirms', () => {
+    const spy = spyOn(service, 'remove').and.returnValue(EMPTY)
+    spyOn(window, 'confirm').and.returnValue(false)
+    component.delete(10)
+
+    expect(spy).not.toHaveBeenCalled()
+  })
+
 
 })
